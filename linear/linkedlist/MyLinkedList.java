@@ -3,7 +3,10 @@ package linear.linkedlist;
 import linear.Node;
 import linear.list.MyList;
 
-public class MyLinkedList<T> implements MyList{
+import java.util.function.Consumer;
+import java.util.stream.Stream;
+
+public class MyLinkedList<T> implements MyList, Cloneable{
     private Node head, tail;
     long size;
     public MyLinkedList(){
@@ -102,9 +105,61 @@ public class MyLinkedList<T> implements MyList{
     public long size() {
         return size;
     }
-    public Node reverse(){
+
+    @Override
+    public boolean addAll(MyList list) {
+        return false;
+    }
+
+    @Override
+    public boolean addAll(long index, MyList list) {
+        return false;
+    }
+
+    @Override
+    public boolean removeAll(MyList list) {
+        return false;
+    }
+
+    @Override
+    public boolean retainAll(MyList list) {
+        return false;
+    }
+
+    public void  reverse(){
+      throw   new UnsupportedOperationException("This operation is currNode yet");
+    }
+
+    @Override
+    public void sort() {
 
     }
+
+    @Override
+    public void swap(long index1, long index2) {
+
+    }
+
+    @Override
+    public void set(long index, Object data) {
+
+    }
+
+    @Override
+    public void removeRange(long fromIndex, long toIndex) {
+
+    }
+
+    @Override
+    public void trimToSize() {
+
+    }
+
+    @Override
+    public void forEach(Consumer consumer) {
+
+    }
+
     public boolean addAll(MyLinkedList list){
         if(list.isEmpty()){
             return false;
@@ -120,5 +175,26 @@ public class MyLinkedList<T> implements MyList{
         }
         return true;
     }
+    public MyLinkedList subList(long fromIndex, long toIndex){
+        return null;
+    }
 
+
+    @Override
+    public MyLinkedList<T> clone() {
+        try {
+            MyLinkedList clone = (MyLinkedList) super.clone();
+            // TODO: copy mutable state here, so the clone can't change the internals of the original
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
+    }
+
+    @Override
+    public Stream myList_stream() {
+        // need to return a stream of the data in the list
+
+        return Stream.builder().build();
+    }
 }
