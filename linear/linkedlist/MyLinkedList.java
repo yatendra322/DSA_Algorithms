@@ -105,4 +105,20 @@ public class MyLinkedList<T> implements MyList{
     public Node reverse(){
 
     }
+    public boolean addAll(MyLinkedList list){
+        if(list.isEmpty()){
+            return false;
+        }
+        if(head == null){
+            head = list.head;
+            tail = list.tail;
+        }else {
+            tail.next = list.head;
+            list.head.prev = tail;
+            tail = list.tail;
+
+        }
+        return true;
+    }
+
 }
