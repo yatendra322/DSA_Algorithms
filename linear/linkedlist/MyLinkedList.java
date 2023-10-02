@@ -3,10 +3,11 @@ package linear.linkedlist;
 import linear.Node;
 import linear.list.MyList;
 
+import java.io.Serializable;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-public class MyLinkedList<T> implements MyList, Cloneable{
+public class MyLinkedList<T> implements MyList<T>, Cloneable, Serializable {
     private Node head, tail;
     long size;
     public MyLinkedList(){
@@ -25,6 +26,18 @@ public class MyLinkedList<T> implements MyList, Cloneable{
             newNode.prev = tail;
             tail = newNode;
             //head.next = newNode;
+        }
+    }
+
+    private void add(Node node, MyLinkedList<T> obj) {
+
+        if (obj.head == null) {
+            obj.head = node;
+            obj.tail = node;
+        } else {
+            obj.tail.next = node;
+            node.prev = obj.tail;
+            obj.tail = node;
         }
     }
 
@@ -160,7 +173,7 @@ public class MyLinkedList<T> implements MyList, Cloneable{
 
     }
 
-    public boolean addAll(MyLinkedList list){
+    public boolean addAll(MyLinkedList<T> list) {
         if(list.isEmpty()){
             return false;
         }
@@ -175,26 +188,50 @@ public class MyLinkedList<T> implements MyList, Cloneable{
         }
         return true;
     }
-    public MyLinkedList subList(long fromIndex, long toIndex){
-        return null;
-    }
 
-
-    @Override
-    public MyLinkedList<T> clone() {
+    public MyLinkedList<T> subList(long fromIndex, long toIndex) throws CloneNotSupportedException {
+        Node currNode = head;
+        long currIndex = 0;
+        MyLinkedList<T> subList = null;
         try {
-            MyLinkedList clone = (MyLinkedList) super.clone();
-            // TODO: copy mutable state here, so the clone can't change the internals of the original
-            return clone;
+            subList = (MyLinkedList<T>) super.clone();
         } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
+            throw new CloneNotSupportedException(e.getMessage());
         }
+
+        while (currNode != null) {
+            if (currIndex >= fromIndex && currIndex < toIndex) {
+                subList.add(currNode.clone(), subList);
+                subList.size++;
+            }
+            currNode = currNode.next;
+            currIndex++;
+        }
+        if (currIndex < fromIndex || currIndex < toIndex)
+            throw new ArrayIndexOutOfBoundsException("you do not enough elements in linked lists");
+        return subList;
+    }
+
+
+    /**
+     * if you see here the deep clone is get accomplished.
+     */
+    @Override
+    public MyLinkedList<T> clone() throws CloneNotSupportedException {
+
+        MyLinkedList<T> clone = null;
+        try {
+            clone = subList(0, size);
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+        return clone;
     }
 
     @Override
-    public Stream myList_stream() {
+    public Stream myListStream() {
         // need to return a stream of the data in the list
 
-        return Stream.builder().build();
+        return Stream.of(this).flatMap(fl -> Stream.of(fl.head));
     }
 }

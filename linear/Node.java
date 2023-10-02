@@ -1,12 +1,13 @@
 package linear;
 
-public class Node implements Cloneable{
+public class Node<T> implements Cloneable {
 
 
     public Node  prev;
-    public Object data;
+    public T data;
     public Node  next;
-    public Node(Object data){
+
+    public Node(T data) {
         this.data = data;
     }
 
