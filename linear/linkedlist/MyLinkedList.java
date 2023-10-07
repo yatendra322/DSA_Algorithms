@@ -1,6 +1,7 @@
 package linear.linkedlist;
 
 import linear.Node;
+import linear.array.MyArrayList;
 import linear.list.MyList;
 
 import java.io.Serializable;
@@ -121,8 +122,28 @@ public class MyLinkedList<T> implements MyList<T>, Cloneable, Serializable {
 
     @Override
     public boolean addAll(MyList list) {
-        return false;
+        if (list.isEmpty())
+            return false;
+        if (list instanceof MyLinkedList<?>) {
+            MyLinkedList<T> list1 = (MyLinkedList<T>) list;
+            if (head == null) {
+                head = list1.head;
+                tail = list1.tail;
+            } else {
+                tail.next = list1.head;
+                list1.head.prev = tail;
+                tail = list1.tail;
+            }
+        } else if (list instanceof MyArrayList) {
+            MyArrayList<T> list1 = (MyArrayList<T>) list;
+            for (T t : list1) {
+                add(t);
+            }
+        }
+        return true;
     }
+
+
 
     @Override
     public boolean addAll(long index, MyList list) {
@@ -150,11 +171,39 @@ public class MyLinkedList<T> implements MyList<T>, Cloneable, Serializable {
 
     @Override
     public void swap(long index1, long index2) {
+        long smallIndex = Math.min(index1, index2);
+        long bigIndex = Math.max(index1, index2);
+        Node currNode = head;
+        long index = 0;
+        Node firstNode = null;
+
+        while (currNode.next != null && index <= bigIndex) {
+            if (index == smallIndex)
+                firstNode = currNode;
+            currNode = currNode.next;
+            index++;
+        }
+        Object nodeData = currNode.prev.data;
+        currNode.prev.data = firstNode;
+        firstNode.data = nodeData;
 
     }
 
     @Override
     public void set(long index, Object data) {
+        Node currNode = head;
+        int nodeIndex = 0;
+        while (currNode.next != null) {
+            if (nodeIndex == index) {
+                currNode.data = data;
+                break;
+            }
+            if (nodeIndex > index)
+                throw new ArrayIndexOutOfBoundsException("you do not enough elements in linked lists");
+
+            currNode = currNode.next;
+            nodeIndex++;
+        }
 
     }
 
