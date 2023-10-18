@@ -1,6 +1,6 @@
-package linear.array;
+package ak.qw;
 
-import linear.list.MyList;
+import ak.list.MyList;
 
 import java.util.RandomAccess;
 import java.util.function.Consumer;

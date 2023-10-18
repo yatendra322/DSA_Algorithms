@@ -1,8 +1,8 @@
-package linear.linkedlist;
+package ak.we;
 
-import linear.Node;
-import linear.array.MyArrayList;
-import linear.list.MyList;
+import ak.Node;
+import ak.qw.MyArrayList;
+import ak.list.MyList;
 
 import java.io.Serializable;
 import java.util.function.Consumer;

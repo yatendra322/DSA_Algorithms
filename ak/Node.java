@@ -1,4 +1,4 @@
-package linear;
+package ak;
 
 public class Node<T> implements Cloneable {
 
