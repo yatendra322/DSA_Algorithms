@@ -1,8 +1,6 @@
-package org.multithreading.sorting.algorithms;
+package org.multithreading.algorithms.comparisionBasedAlgo;
 
-import org.multithreading.sorting.interfaces.SortAlgorithm;
-
-import java.util.Arrays;
+import org.multithreading.interfaces.SortAlgorithm;
 
 public class SelectionSort implements SortAlgorithm {
 
@@ -11,8 +9,7 @@ public class SelectionSort implements SortAlgorithm {
         for (int i = 0; i < arr.length - 1; i++) {
             int minIndex = i;
             for (int j = i + 1; j < arr.length; j++) {
-                if (arr[j] < arr[i]) {
-
+                if (arr[j] < arr[minIndex]) {
                     minIndex = j;
                 }
             }
@@ -24,10 +21,9 @@ public class SelectionSort implements SortAlgorithm {
         }
     }
 
-
     @Override
-    public void sort(int[] arr) {
+    public int[] sort(int[] arr) {
         selectionSort(arr);
-        System.out.println("arr: " + Arrays.toString(arr));
+        return arr;
     }
 }

@@ -1,6 +1,6 @@
-package org.multithreading.sorting.algorithms;
+package org.multithreading.algorithms.comparisionBasedAlgo;
 
-import org.multithreading.sorting.interfaces.SortAlgorithm;
+import org.multithreading.interfaces.SortAlgorithm;
 
 public class QuikSort implements SortAlgorithm {
 
@@ -31,7 +31,9 @@ public class QuikSort implements SortAlgorithm {
     }
 
     @Override
-    public void sort(int[] arr) {
+    public int[] sort(int[] arr) {
+
         quickSort( arr, 0, arr.length - 1 );
+        return arr;
     }
 }

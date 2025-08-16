@@ -1,21 +1,20 @@
-package org.multithreading.sorting.algorithms;
+package org.multithreading.algorithms.comparisionBasedAlgo;
 
-import org.multithreading.sorting.interfaces.SortAlgorithm;
+import org.multithreading.interfaces.SortAlgorithm;
 
 public class MergeSort implements SortAlgorithm {
     @Override
-    public void sort(int[] arr) {
+    public int[] sort(int[] arr) {
         int l = 0, r = arr.length - 1;
         mergeSort(arr, l, r);
+        return arr;
     }
 
     private void mergeSort(int[] arr, int l, int r) {
         if (l < r) {
             int m = l + (r - l) / 2;
-
             mergeSort(arr, l, m);
             mergeSort(arr, m + 1, r);
-
             merge(arr, l, m, r);
         }
     }

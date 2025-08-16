@@ -1,12 +1,13 @@
-package org.multithreading.sorting.main;
+package org.multithreading.main;
 
-import org.multithreading.sorting.algorithms.*;
-import org.multithreading.sorting.tasks.SortTask;
-import org.multithreading.sorting.testDataGenerator.UniqueLongGenerator;
+import org.multithreading.algorithms.comparisionBasedAlgo.*;
+import org.multithreading.tasks.SortTask;
+import org.multithreading.testDataGenerator.UniqueLongGenerator;
+import org.multithreading.utils.LibraryMsg;
 
-import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class SortingMain {
     public static void main(String[] args) {
@@ -16,7 +17,8 @@ public class SortingMain {
         int[] arr4 = arr1.clone();
         int[] arr5 = arr1.clone();
         int[] arr6 = arr1.clone();
-        System.out.println("arr1: " + Arrays.toString(arr1));
+        int[] arr7 = arr1.clone();
+        //System.out.println("arr1: " + Arrays.toString(arr1));
         try {
 
 
@@ -27,10 +29,17 @@ public class SortingMain {
             executorService.execute(new SortTask(new MergeSort(), arr3, "MergeSort"));
             executorService.execute(new SortTask(new QuikSort(), arr4, "QuickSort"));
             executorService.execute(new SortTask(new SelectionSort(), arr5, "SelectionSort"));
+            //executorService.execute(new SortTask(new CountingSort(), arr6, "CountSort"));
+            executorService.execute(new SortTask(new HeapSort(), arr7, "HeapSort"));
 
-            executorService.close();
 
+            executorService.shutdown();
 
+            try {
+                if (executorService.awaitTermination(1, TimeUnit.MINUTES)) LibraryMsg.showLog();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
 
             //executorService.execute(new SortTask(new CountingSort(), arr6, "CountingSort"));

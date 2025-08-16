@@ -1,6 +1,8 @@
-package org.multithreading.sorting.tasks;
+package org.multithreading.tasks;
 
-import org.multithreading.sorting.interfaces.SortAlgorithm;
+import org.multithreading.interfaces.SortAlgorithm;
+import org.multithreading.utils.LibraryMsg;
+import org.multithreading.utils.Utils;
 
 public class SortTask implements Runnable {
 
@@ -18,8 +20,8 @@ public class SortTask implements Runnable {
     public void run() {
         System.out.println("Starting " + this.name + " Sorting...");
         long start = System.currentTimeMillis();
-        algorithm.sort(array);
+        int sortedArr[] = algorithm.sort(array);
         long end = System.currentTimeMillis();
-        System.out.println(name + " sorting completed in " + (end - start) + "ms");
+        LibraryMsg.updateLog(name,start,end,Utils.isSortedAscending(sortedArr));
     }
 }

@@ -1,4 +1,4 @@
-package org.multithreading.sorting.algorithms;
+package org.multithreading.utils;
 
 import java.util.Arrays;
 

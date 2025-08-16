@@ -1,10 +1,10 @@
-package org.multithreading.sorting.algorithms;
+package org.multithreading.algorithms.comparisionBasedAlgo;
 
-import org.multithreading.sorting.interfaces.SortAlgorithm;
+import org.multithreading.interfaces.SortAlgorithm;
 
 public class BubbleSort implements SortAlgorithm {
     @Override
-    public void sort(int[] arr) {
+    public int[] sort(int[] arr) {
 
         int i, j, temp;
         boolean flag;
@@ -24,7 +24,7 @@ public class BubbleSort implements SortAlgorithm {
                 break;
 
         }
-
+        return arr;
     }
 
 }
