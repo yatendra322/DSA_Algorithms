@@ -1,10 +1,10 @@
-package org.multithreading.sorting.algorithms;
+package org.multithreading.algorithms.comparisionBasedAlgo;
 
-import org.multithreading.sorting.interfaces.SortAlgorithm;
+import org.multithreading.interfaces.SortAlgorithm;
 
 public class InsertionSort implements SortAlgorithm {
     @Override
-    public void sort(int[] arr) {
+    public int[] sort(int[] arr) {
 
         int n = arr.length;
         for (int i = 1; i < n; ++i) {
@@ -16,6 +16,6 @@ public class InsertionSort implements SortAlgorithm {
             }
             arr[j + 1] = key;
         }
-
+        return arr;
     }
 }
